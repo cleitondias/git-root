@@ -1,0 +1,168 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "cgutech.petshopoverview",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": []
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZA_FE02_ATENDIMENTO_176_CDS/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZA_FE02_ATENDIMENTO_176_CDS_VAN",
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZA_FE02_ATENDIMENTO_176_CDS_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZA_FE02_ATENDIMENTO_176_CDS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZA_FE02_ATENDIMENTO_176_CDS_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "offline": false,
+        "sourceTemplate": {
+            "id": "OVP.smartovptemplate",
+            "version": "1.41.1"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "1.95.0",
+            "libs": {
+                "sap.ovp": {}
+            },
+            "components": {}
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties",
+                "preload": false
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "mainService": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "extends": {
+            "extensions": {}
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainService",
+        "globalFilterEntityType": "za_fe02_atendimento_176Type",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": false,
+        "cards": {
+            "CARD_000": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "Valor de Atendimentos",
+                    "entitySet": "za_fe02_atendimento_176",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#ValorLojaDataPointQualifier",
+                    "valueSelectionInfo": "Valor Total de Atendimentos",
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#ValorLojaChartQualifier",
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#ToPetAnalise"
+                }
+            },
+            "CARD_001": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.table",
+                "settings": {
+                    "title": "Status de Atendimentos",
+                    "entitySet": "za_fe02_atendimento_176",
+                    "sortOrder": "ascending",
+                    "sortBy": "Data",
+                    "tabs": [
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#AtendimentoIniciadoAgendado",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#IniciadoAgendadoSelection",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#StatusIniciadoAgendadoQualifier",
+                            "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#ToPetManage",
+                            "value": "Iniciado/Agendado"
+                        },
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#AtendimentoFinalizado",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#FinalizadoSelection",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#StatusFinalizadoQualifier",
+                            "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#ToPetManage",
+                            "value": "Finalizado"
+                        },
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#AtendimentoCancelado",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#CanceladoSelection",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#StatusCanceladoQualifier",
+                            "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#ToPetManage",
+                            "value": "Cancelado"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "sap.ui.generic.app": {
+        "settings": {}
+    }
+}
